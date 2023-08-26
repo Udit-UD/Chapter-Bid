@@ -1,8 +1,12 @@
-import User from "../models/userModel.js";
+import model from "../models/index.js";
 import createError from "http-errors";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
+import sendEmail from "../services/sendEmail.js";
+import template from "../services/emailTemplate.js";
 
+const User = model.User;
+const Token = model.Token;
 
 export const register = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -13,10 +17,16 @@ export const register = async (req, res) => {
       throw createError.Conflict(
         `A user with this ${email} email already exists!!`
       );
-    const token = uuidv4();
-    const user = new User({ userName, email, password, token });
-    await user.save();
-    // sendVerification(user);
+    let user = new User({ userName, email, password });
+    user = await user.save();
+    const token = new Token({
+      userId: user._id,
+      token: uuidv4(),
+    });
+
+    await token.save();
+    await mailSend(user._id, user.userName, email, token.token);
+
     res.status(201).json({
       Message:
         "User registered successfully \n Check your email to verify your account",
@@ -35,8 +45,12 @@ export const login = async (req, res) => {
         `User with this ${email} emailId does not exist !!`
       );
     }
-    if(!user.isVerified){
-      throw createError.Forbidden(`User email is not verified, please verify it first`);
+    if (!user.isVerified) {
+      const t = await Token.findOne({ userId: user._id });
+      await mailSend(user._id, user.userName, email, t);
+      throw createError.Forbidden(
+        `User email is not verified, \n A verification link has been sent to your registered email. `
+      );
     }
     const isMatch = await user.isValidPassword(password);
     if (!isMatch) throw createError.Unauthorized("Username/password not valid");
@@ -48,3 +62,15 @@ export const login = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+async function mailSend(userId, userName, email, token) {
+  const url = `${process.env.BASE_URL}api/users/${userId}/verify/${token.token}`;
+  const message = template(userName, url);
+  const options = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Welcome to Chapter Bid - Verify Your Email",
+    html: message,
+  };
+  await sendEmail(options);
+}
