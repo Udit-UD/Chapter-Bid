@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv'; 
 import connect from "./services/connectDb.js";
+import routes from "./routes/authRoute.js";
 
 dotenv.config(); 
 
@@ -15,8 +16,9 @@ app.use(morgan('tiny'));
 app.disable('x-powered-by'); 
 // Middlewares
 
-const port = process.env.PORT || 3000; 
+app.use('/api',routes);
 
+const port = process.env.PORT || 3000; 
 
 // Start the server only when a valid database connection is established
 connect().then(() => {

@@ -30,6 +30,10 @@ export const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    token:{
+      type:String,
+      required:true,
+    },
     address: {
       type: String,
       required:false

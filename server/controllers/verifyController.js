@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import User from "../models/userModel.js";
 import createError from "http-errors";
 
 export const verifyEmail = async (req, res) => {
@@ -9,7 +9,7 @@ export const verifyEmail = async (req, res) => {
       throw createError.NotAcceptable(`Sorry your account does not exists!!`);
     }
     user.isVerified = true;
-    user.save;
+    user.save();
     res
       .status(200)
       .json({ message: "Your account is verified now. You can login" });
