@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../api/axios";
+import axios from "axios";
 
-const RegisterURL = "/register";
+const URL = "http://localhost:3000/api/register";
 
 const CredForm = () => {
   const [email, setEmail] = useState("");
@@ -11,13 +11,15 @@ const CredForm = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      const res = await axios.post(RegisterURL, 
-        JSON.stringify({userName, email, password}),
-        {
-          headers: {"Content-Type": "application/json"},
-          withCredentials: true
+      const res=await axios({
+        method: 'post',
+        url: URL,
+        data: {
+          userName: userName,
+          email: email,
+          password:password
         }
-      );
+      });
       console.log(res?.data);
       setUserName('');
       setPassword('');

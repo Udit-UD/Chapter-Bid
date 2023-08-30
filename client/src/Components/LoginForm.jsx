@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
@@ -37,7 +37,7 @@ const LoginForm = () => {
               placeholder="Password"
             />
 
-            <button class="click-btn rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 hover:from-pink-500 hover:to-yellow-500 hover:shadow-lg transition-all block mx-auto my-8 p-3 px-16 text-white font-bold">
+            <button className="click-btn rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 hover:from-pink-500 hover:to-yellow-500 hover:shadow-lg transition-all block mx-auto my-8 p-3 px-16 text-white font-bold">
               {" "}
               Login{" "}
             </button>

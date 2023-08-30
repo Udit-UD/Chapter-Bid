@@ -64,7 +64,8 @@ export const login = async (req, res) => {
 };
 
 async function mailSend(userId, userName, email, token) {
-  const url = `${process.env.BASE_URL}api/users/${userId}/verify/${token.token}`;
+  console.log(token);
+  const url = `${process.env.BASE_URL}api/users/${userId}/verify/${token}`;
   const message = template(userName, url);
   const options = {
     from: process.env.EMAIL,

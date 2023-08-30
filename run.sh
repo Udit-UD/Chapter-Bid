@@ -6,6 +6,6 @@ if [ ! -d "node_modules" ]; then
 fi
 
 
-npm run client
+npm run client &
 
-# npm run start
+npm run server
