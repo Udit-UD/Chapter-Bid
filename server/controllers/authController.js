@@ -32,6 +32,7 @@ export const register = async (req, res) => {
         "User registered successfully \n Check your email to verify your account",
     });
   } catch (error) {
+    console.log(error.message);
     res.status(400).json({ message: error.message });
   }
 };

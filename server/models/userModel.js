@@ -7,7 +7,7 @@ export const UserSchema = new Schema(
     userName: {
       type: String,
       required: [true, "Please provide unique Username"],
-      unique: [true, "Username Exist"],
+      unique: false,
     },
     email: {
       type: String,
@@ -21,8 +21,8 @@ export const UserSchema = new Schema(
     },
     number: {
       type: Number,
-      required: [false, "An account already exists with this number"],
-      unique: true,
+      required: false,
+      unique: false,
       min: [1000000000, "Number must be at least 10 digits"],
       max: [9999999999, "Number must be at most 10 digits"],
     },
