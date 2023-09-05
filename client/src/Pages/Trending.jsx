@@ -1,5 +1,5 @@
-import React from "react";
-import NavBar from "../Components/navBar";
+// import React from "react";
+// import NavBar from "../Components/navBar";
 
 const Trending = () => {
     return(

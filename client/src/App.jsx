@@ -1,27 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import Signup from "./Pages/SignUp";
-import Home from "./Pages/Home";
-import About from "./Pages/About"; 
-import Contact from "./Pages/Contact";
-import Trending from "./Pages/Trending";
-import NavBar from "./Components/navBar";
+// import './App.css';
+import { Routes, Route } from "react-router-dom";
+import SignupPage from "./Pages/SignUp";
 import Login from "./Pages/Login";
-
 
 function App() {
   return (
-    <>
-    <NavBar />
-    <Routes>
-      <Route path="/" element={<Signup />} />
-      <Route path="signup" element={<Signup />} />
-      <Route path="login" element={<Login />}></Route>
-      <Route path="home" element={<Home />} />
-      <Route path="contact" element={<Contact />} />
-      <Route path="about" element={<About />} />
-      <Route path="trending" element={<Trending />} />      
-    </Routes>
-    </>
+    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <Routes>
+          <Route path="/" element={<Login/>} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

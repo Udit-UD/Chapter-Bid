@@ -1,12 +1,16 @@
-import React from "react";
-import CredForm from "../Components/SignupForm";
+import Header from "../components/Auth/Header";
+import Signup from "../components/Auth/Signup";
 
-const Signup = () => {
-  return (
-    <>
-      <CredForm />
-    </>
-  );
-};
-
-export default Signup;
+export default function SignupPage(){
+    return(
+        <>
+            <Header
+              heading="Signup to create an account"
+              paragraph="Already have an account? "
+              linkName="Login"
+              linkUrl="/"
+            />
+            <Signup/>
+        </>
+    )
+}
