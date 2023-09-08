@@ -46,7 +46,8 @@ export default function Signup(){
   }
 
     return(
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+      <div className='w-full flex justify-center items-center m-0 p-0'>
+        <form className="space-y-6 w-1/3" onSubmit={handleSubmit}>
         <div className="">
         {
                 fields.map(field=>
@@ -71,5 +72,7 @@ export default function Signup(){
          
 
       </form>
+      </div>
+        
     )
 }

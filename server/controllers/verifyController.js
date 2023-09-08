@@ -15,7 +15,11 @@ export const verifyEmail = async (req, res) => {
       throw createError.NotFound("Invalid link");
     }
 
-    await User.updateOne({ _id: user._id, isVerified: true });
+    await User.updateOne(
+      { _id: user._id}, 
+      {$set:{ isVerified: true }
+    });
+
     await Token.deleteOne({
       userId: user._id,
       token: req.params.token,

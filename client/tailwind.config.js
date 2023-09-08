@@ -2,17 +2,21 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/***/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-      backgroundImage:{
-        'login-background': "url(/src/assets/Images/login_bg.jpg)",
-      },
       colors: {
         'login-trans': "rgba(255,255,255, 0.29)",
         'shad-trans': "0px 4px 16px rgba(0,0,0,0.5)"
-      }
+      },
+      height: {
+        'img-h': '60vh',
+        'banner': '80vh',
+        '90': "90vh",
+        '95': "95vh",
+        '70': "70%"
+      },
     },
     fontSize:{
       "sxl": "1.09rem",

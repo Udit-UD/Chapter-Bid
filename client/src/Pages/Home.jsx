@@ -1,10 +1,17 @@
 import React from "react";
-import NavBar from "../Components/navBar";
+import HeroSection from "../Components/Home/HeroSection";
+import RunningBids from "../Components/Home/RunningBids";
+import Steps from "../Components/Home/Steps";
 
 const Home = () => {
     return(
         <>
-            This is Home Page
+            <div className="overflow-hidden">
+            <HeroSection />
+            <RunningBids />
+            <Steps />
+            </div>
+
         </>
     )
 }
