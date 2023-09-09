@@ -22,11 +22,12 @@ const RunningBids = () => {
     
   return (
     <>
-      <div className="h-95 min-w-screen p-6 px-8 pb-4">
+      <div className="h-95 min-w-screen bg-slate-50 p-6 px-8 pb-4">
         <span>
           <h1 className="text-4xl text-center mt-4 text-slate-700 font-sans" >Upcoming Bids 💸</h1>
           <h1 className="text-l text-center mb-6 text-slate-700  font-sans" >Stay informed about upcoming auctions before they expire!</h1>
         </span>
+
         {booksData && <Books booksData = {booksData} /> }
         
       </div>
