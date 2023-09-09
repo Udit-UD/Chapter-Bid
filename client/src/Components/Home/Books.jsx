@@ -22,7 +22,7 @@ const Books = ({ booksData }) => {
   const divCount = [0, 1, 2];
   return (
     <>
-      <div className="main-box w-full flex relative mt-12 mb-4 justify-center items-center h-4/5">
+      <div className="main-box w-full flex relative mt-12 mb-2 justify-center items-center h-4/5">
         <div className="absolute rounded-e-lg -left-8 bg-slate-200 w-auto p-2 text-3xl h-20 top-1/2 flex justify-between">
           <button onClick={() => handleClick("left")}>
             <AiOutlineLeft />
