@@ -1,4 +1,3 @@
-import React from "react";
 import HeroSection from "../Components/Home/HeroSection";
 import RunningBids from "../Components/Home/RunningBids";
 import Steps from "../Components/Home/Steps";

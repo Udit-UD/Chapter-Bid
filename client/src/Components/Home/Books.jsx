@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
 const Books = ({ booksData }) => {
@@ -17,7 +17,6 @@ const Books = ({ booksData }) => {
       });
     }
   };
-
 
   const divCount = [0, 1, 2];
   return (
