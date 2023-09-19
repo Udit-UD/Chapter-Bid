@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv'; 
 import connect from "./services/connectDb.js";
-import routes from "./routes/authRoute.js";
+import { setupRoutes } from "./routes/index.js";
 
 dotenv.config(); 
 
@@ -16,7 +16,7 @@ app.use(morgan('tiny'));
 app.disable('x-powered-by'); 
 // Middlewares
 
-app.use('/api',routes);
+setupRoutes(app);
 
 
 const port = process.env.PORT || 3000; 

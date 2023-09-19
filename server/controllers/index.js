@@ -1,10 +1,18 @@
-import {register,login} from "./authController.js";
-import {verifyEmail} from "./verifyController.js";
+export {
+    addBook,
+    getBook,
+    getBooks,
+    modifyBook,
+    deleteBook
+} from './booksController.js'
 
-const controllers = {
+export {
     register,
-    login,
-    verifyEmail
-};
+    login
+} from './authController.js'
+// export const userControllers = {
+//     register,
+//     login,
+//     verifyEmail
+// };
 
-export default controllers;

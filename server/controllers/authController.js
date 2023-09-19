@@ -19,13 +19,20 @@ export const register = async (req, res) => {
       );
     let user = new User({ userName, email, password });
     user = await user.save();
-    const token = new Token({
-      userId: user._id,
-      token: uuidv4(),
-    });
 
-    await token.save();
-    await mailSend(user._id, user.userName, email, token.token);
+    // Will do email verification later
+
+    // const token = new Token({
+    //   userId: user._id,
+    //   token: uuidv4(),
+    // });
+
+    // await token.save();
+    // try {
+    //   await mailSend(user._id, user.userName, email, token.token);
+    // } catch (error) {
+    //   throw new Error(error.message)
+    // }
 
     res.status(201).json({
       Message:
@@ -46,13 +53,15 @@ export const login = async (req, res) => {
         `User with this ${email} emailId does not exist !!`
       );
     }
-    if (!user.isVerified) {
-      const t = await Token.findOne({ userId: user._id });
-      await mailSend(user._id, user.userName, email, t);
-      throw createError.Forbidden(
-        `User email is not verified, \n A verification link has been sent to your registered email. `
-      );
-    }
+    // Will do email verfication later
+
+    // if (!user.isVerified) {
+    //   const t = await Token.findOne({ userId: user._id });
+    //   await mailSend(user._id, user.userName, email, t);
+    //   throw createError.Forbidden(
+    //     `User email is not verified, \n A verification link has been sent to your registered email. `
+    //   );
+    // }
     const isMatch = await user.isValidPassword(password);
     if (!isMatch) throw createError.Unauthorized("Username/password not valid");
 
@@ -64,15 +73,15 @@ export const login = async (req, res) => {
   }
 };
 
-async function mailSend(userId, userName, email, token) {
-  console.log(token);
-  const url = `${process.env.BASE_URL}api/users/${userId}/verify/${token}`;
-  const message = template(userName, url);
-  const options = {
-    from: process.env.EMAIL,
-    to: email,
-    subject: "Welcome to Chapter Bid - Verify Your Email",
-    html: message,
-  };
-  await sendEmail(options);
-}
+// async function mailSend(userId, userName, email, token) {
+//   console.log(token);
+//   const url = `${process.env.BASE_URL}api/users/${userId}/verify/${token}`;
+//   const message = template(userName, url);
+//   const options = {
+//     from: process.env.EMAIL,
+//     to: email,
+//     subject: "Welcome to Chapter Bid - Verify Your Email",
+//     html: message,
+//   };
+//   await sendEmail(options);
+// }
