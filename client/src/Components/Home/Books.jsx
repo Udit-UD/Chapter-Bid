@@ -3,23 +3,24 @@ import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
 const Books = ({ booksData }) => {
   const [index, setIndex] = useState(0);
+  
   const handleClick = (dir) => {
-    console.log(booksData.length);
-    if (dir === "right") {
-      setIndex((prevIndex) => (prevIndex + 1) % booksData.length);
-    } else {
-      setIndex((prevIndex) => {
+    const booksPerPage = 4;
+    setIndex((prevIndex) => {
+      if (dir === "right") {
+        return (prevIndex + 1) % Math.ceil(booksData.length / booksPerPage);
+      } else {
         if (prevIndex === 0) {
-          return booksData.length - 1;
+          return Math.floor(booksData.length / booksPerPage) - 1;
         } else {
           return prevIndex - 1;
         }
-      });
-    }
-  };
+      }
+    });
+  }; 
 
 
-  const divCount = [0, 1, 2];
+  const divCount = [0, 1, 2, 3];
   return (
     <>
       <div className="main-box w-full flex relative mt-12 mb-2 justify-center items-center h-4/5">
