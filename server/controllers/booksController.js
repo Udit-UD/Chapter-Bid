@@ -1,6 +1,6 @@
 import model from "../models/index.js";
 
-const User = model.User;
+// const User = model.User;
 const Book = model.Book;
 
 /**
@@ -27,7 +27,7 @@ export const addBook = async (req, res) => {
 };
 /**
  *
- * @Route GET /api/book/add
+ * @Route GET /api/book/modifyBook/:id
  * @Access private
  */
 export const modifyBook = async (req, res) => {
@@ -48,7 +48,7 @@ export const modifyBook = async (req, res) => {
 };
 /**
  *
- * @Route GET /api/book/add
+ * @Route GET /api/book/deleteBook/:id
  * @Access private
  */
 export const deleteBook = async (req, res) => {
@@ -66,7 +66,7 @@ export const deleteBook = async (req, res) => {
 };
 /**
  *
- * @Route GET /api/book/add
+ * @Route GET /api/book/getBook/:id
  * @Access private
  */
 export const getBook = async (req, res) => {
@@ -84,13 +84,34 @@ export const getBook = async (req, res) => {
 };
 /**
  *
- * @Route GET /api/book/add
+ * @Route GET /api/book/getBooks
  * @Access private
  */
 export const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({ availableForAuction: true });
-    res.json(books);
+    const pageNumber = parseInt(req.query.pageNumber);
+    const limit = parseInt(req.query.limit);
+    const result = {};
+    const totalBooks = await Book.countDocuments().exec();
+    let startIndex = pageNumber * limit;
+    const endIndex = (pageNumber + 1) * limit;
+    result.totalBooks = totalBooks;
+    if (startIndex > 0) {
+      result.previous = {
+        pageNumber: pageNumber - 1,
+        limit: limit,
+      };
+    }
+
+    if (endIndex < (await Book.countDocuments().exec())) {
+      result.next = {
+        pageNumber: pageNumber + 1,
+        limit: limit,
+      };
+    }
+    result.data = await Book.find().sort("-_id").skip(startIndex).limit(limit).exec();
+    result.rowPerPage=limit;
+    res.json(result);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to retrieve books." });
