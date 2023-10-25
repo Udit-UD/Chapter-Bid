@@ -7,7 +7,7 @@ import { setupRoutes } from "./routes/index.js";
 
 dotenv.config(); 
 
-const app = express(); 
+const app = express();
 
 // Middlewares
 app.use(express.json()); 
