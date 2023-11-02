@@ -3,6 +3,11 @@ import { loginFields } from "../../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
+const URL = "http://localhost:3000/api/v1/login";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -10,7 +15,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
@@ -21,8 +26,25 @@ export default function Login() {
   };
 
   //Handle Login API Integration here
-  const authenticateUser = () => {
-    console.log("Working");
+  const authenticateUser = async() => {
+    console.log("working")
+    try {
+        const res=await axios({
+            method: 'post',
+            url: URL,
+            data: {
+              email: loginState.emailAddress,
+              password:loginState.password
+            }
+        });
+      console.log(res?.data)
+      console.log(res?.status)
+      {
+        res.status==200 && navigate('/home')
+      }
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   return (

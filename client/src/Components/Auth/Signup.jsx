@@ -3,8 +3,10 @@ import { signupFields } from "../../constants/formFields"
 import FormAction from "./FormAction";
 import Input from "./Input";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const URL = "http://localhost:3000/api/register";
+
+const URL = "http://localhost:3000/api/v1/register";
 
 const fields=signupFields;
 let fieldsState={};
@@ -13,7 +15,7 @@ fields.forEach(field => fieldsState[field.id]='');
 
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
-
+  const navigate = useNavigate();
   const handleChange=(e)=>setSignupState({...signupState,[e.target.id]:e.target.value});
 
   const handleSubmit=(e)=>{
@@ -37,9 +39,12 @@ export default function Signup(){
               email: signupState.emailAddress,
               password:signupState.password
             }
-          });
-          console.log(res?.data);
-        
+        });
+      console.log(res?.data)
+      console.log(res?.status)
+      {
+        res.status==201 && navigate('/')
+      }
     } catch (error) {
         console.log(error);
     }

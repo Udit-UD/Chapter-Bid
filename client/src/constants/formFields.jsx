@@ -1,13 +1,13 @@
 const loginFields=[
     {
-        labelText:"Email address",
-        labelFor:"email-address",
-        id:"email-address",
-        name:"email",
-        type:"email",
-        autoComplete:"email",
+        labelText:"emailAddress",
+        labelFor:"emailAddress",
+        id:"emailAddress",
+        name:"emailAddress",
+        type:"emailAddress",
+        autoComplete:"emailAddress",
         isRequired:true,
-        placeholder:"Email address"   
+        placeholder:"emailAddress"   
     },
     {
         labelText:"Password",
