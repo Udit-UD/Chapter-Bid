@@ -48,7 +48,7 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center">
       <form className="space-y-6 w-1/3" onSubmit={handleSubmit}>
         <div className="-space-y-px">
           {fields.map((field) => (

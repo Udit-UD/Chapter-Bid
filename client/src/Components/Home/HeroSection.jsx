@@ -51,7 +51,7 @@ const HeroSection = () => {
               alt="book"
             />
             <div className="absolute w-3/4 h-10 bg-green-600 text-white right-0 -bottom-2 px-5 flex rounded-l-xl font-bold items-center">
-              69 Books Auction Happening Now!
+              20 Books Auction Happening Now!
             </div>
           </div>
         </div>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
+import { useBookDataContext } from "../../Context/BookContext";
+import { Link } from "react-router-dom";
 
 const Books = ({ booksData }) => {
   const [index, setIndex] = useState(0);
+  const {setBookData} = useBookDataContext();
   
   const handleClick = (dir) => {
     const booksPerPage = 4;
@@ -18,6 +21,17 @@ const Books = ({ booksData }) => {
       }
     });
   }; 
+
+  const handleParticipateClick = (clickedBook) => {
+    setBookData(clickedBook);
+    scrollToTop();
+  }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+};
 
 
   const divCount = [0, 1, 2, 3];
@@ -62,14 +76,15 @@ const Books = ({ booksData }) => {
                   </i>
                 </p>
               </span>
-              <form action="participate" method="post">
+              <Link to="/productPage">
                 <button
                   type="submit"
                   className="bg-green-500 hover:bg-green-700 mt-8 font-bold text-white w-full h-12 rounded"
+                  onClick={() => handleParticipateClick(booksData[item+index])}
                 >
                   Participate
                 </button>
-              </form>
+              </Link>
             </div>
           </div>
         ))}

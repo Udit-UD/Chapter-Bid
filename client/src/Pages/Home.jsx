@@ -5,6 +5,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import { TrendingBooks } from "../Components/Home/TrendingBooks";
 import { Tutorial } from "../Components/Home/Tutorial";
 import { Footer } from "../Components/Home/Footer";
+import { data } from "../constants/BooksData";
 
 const Home = () => {
     return(
@@ -12,8 +13,8 @@ const Home = () => {
             <div className="overflow-hidden">
             <Navbar />
             <HeroSection id="upcoming" />
-            <RunningBids />
-            <TrendingBooks />
+            <RunningBids listedBooks={data}/>
+            <TrendingBooks data={data}/>
             <Tutorial />
             <Footer />
             </div>
