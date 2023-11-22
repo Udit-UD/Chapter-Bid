@@ -7,7 +7,7 @@ const loginFields=[
         type:"emailAddress",
         autoComplete:"emailAddress",
         isRequired:true,
-        placeholder:"emailAddress"   
+        placeholder:"Email Address"   
     },
     {
         labelText:"Password",
