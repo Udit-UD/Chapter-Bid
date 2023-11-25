@@ -48,7 +48,7 @@ const Books = ({ booksData }) => {
 
         {divCount.map((item, i) => (
           <div
-            className=" w-1/4 h-full mx-6 shadow-2xl hover:scale-105 ease-in duration-200 rounded-xl p-4 pb-10"
+            className=" w-1/5 h-90% mx-6 shadow-2xl hover:scale-105 ease-in duration-200 rounded-xl p-4 pb-10"
             key={i}
           > 
             <img

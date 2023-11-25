@@ -6,7 +6,8 @@ export const TrendingBooks = ({data}) => {
     <>
         <div className=' h-70vh min-w-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-6 px-8 pb-16'>
             <span>
-                <h1 className="text-4xl font-extrabold text-left text-white mb-10 font-sans">  {">>>"}Trending Books! &#128293; </h1>
+                <h1 className="text-4xl font-extrabold text-left italic text-white  font-sans">  Trending Books</h1>
+                <p className="font-semibold mb-10 text-white ">People are going crazy over them, Participate in Auction Now!</p>
             </span>
             <div className='flex h-img-h'>
 

@@ -35,9 +35,9 @@ export const ProdNav = () => {
           <div className='mr-10'>
 
           {authenticated ? (
-            <Link to="/login">
+            <Link to="/profile">
             <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
-              Logout
+              Profile
             </button>
             </Link>
       ) : (
