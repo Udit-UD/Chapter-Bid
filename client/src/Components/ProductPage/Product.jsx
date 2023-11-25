@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useBookDataContext } from '../../Context/BookContext'
 import {AiOutlineHeart, AiOutlineShopping, AiOutlineInfoCircle, AiFillHeart} from "react-icons/ai"
 import { Recommendations } from './Recommendations';
+import { Link } from 'react-router-dom';
 
 export const Product = ({data}) => {
   const [prodLiked, setProdLiked] = useState(false);
@@ -41,9 +42,11 @@ export const Product = ({data}) => {
                 </div>
 
                 <div className="mt-8">
-                  <button className="rounded w-3/5 h-16 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
-                  Start Bidding <AiOutlineShopping className=' pl-2 text-3xl ' />
-                  </button>
+                  <Link to="/bidding">
+                    <button className="rounded w-3/5 h-16 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-800 text-white">
+                    Start Bidding <AiOutlineShopping className=' pl-2 text-3xl ' />
+                    </button>
+                  </Link>
                 </div>
 
                 <div className="mt-8">
@@ -58,6 +61,7 @@ export const Product = ({data}) => {
               </div>
             </div>
             <div className="w-full h-full mt-8 mb-10">
+
               <Recommendations data={data} />
             </div>
           </div>
