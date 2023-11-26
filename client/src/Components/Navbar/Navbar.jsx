@@ -2,9 +2,16 @@ import {React, useState} from "react";
 import Logo from "../../assets/Images/logo.png";
 import NavLinks from "./NavLinks";
 import { Link } from "react-router-dom";
+import { FaRegBell } from "react-icons/fa6";
 
 const Navbar = () => {
   const [authenticated, setAuthenticated] = useState(true);
+  const [notiClicked, setNotiClicked] = useState(false);
+
+  const handleNotiClick = () =>{
+    setNotiClicked(!notiClicked);
+    console.log("Clicked!");
+  }
 
   return (
     <div className="absolute z-10 flex  px-14 items-center bg-login-trans w-full h-16 shadow-lg">
@@ -14,11 +21,16 @@ const Navbar = () => {
       <NavLinks />
       <div className="flex flex-grow"></div>
       {authenticated ? (
-        <Link to="/profile">
-          <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-login-trans hover:bg-black hover:text-white">
-            Profile 
-          </button>
-        </Link>
+        <div className="flex items-center justify-between">
+          <div className="text-2xl text-gray-700 w-8 m-4 text-center">
+            <FaRegBell className={`hover:cursor-pointer ${notiClicked ? "text-black": ""}`} onClick={handleNotiClick}/>
+          </div>
+          <Link to="/profile">
+            <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-login-trans hover:bg-black hover:text-white">
+              Profile 
+            </button>
+          </Link>
+        </div>
       ) : (
         <>
           <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-login-trans hover:bg-black hover:text-white">
