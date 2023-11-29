@@ -1,50 +1,33 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { loginFields } from "../../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector,useDispatch } from "react-redux";
+import { loginAsync, selectUserData } from "../../Features/Auth/authSlice";
 
-
-const URL = "http://localhost:3000/api/v1/login";
 
 const fields = loginFields;
 let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
+  const userData = useSelector(selectUserData);
   const [loginState, setLoginState] = useState(fieldsState);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
+  
+  useEffect(() => {
+    if (userData.isAuthenticated) navigate("/profile");
+  }, [userData.isAuthenticated, navigate]);
+  const dispatch= useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    authenticateUser();
-  };
-
-  //Handle Login API Integration here
-  const authenticateUser = async() => {
-    console.log("working")
-    try {
-        const res=await axios({
-            method: 'post',
-            url: URL,
-            data: {
-              email: loginState.emailAddress,
-              password:loginState.password
-            }
-        });
-      console.log(res?.data)
-      console.log(res?.status)
-      {
-        res.status==200 && navigate('/home')
-      }
-    } catch (error) {
-        console.log(error);
-    }
+    dispatch(loginAsync(loginState));
   };
 
   return (

@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { signupFields } from "../../constants/formFields"
 import FormAction from "./FormAction";
 import Input from "./Input";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector,useDispatch } from "react-redux";
+import { signupAsync, selectUserData } from "../../Features/Auth/authSlice";
 
-const URL = "http://localhost:3000/api/v1/register";
+
 
 const fields=signupFields;
 let fieldsState={};
@@ -16,38 +17,19 @@ fields.forEach(field => fieldsState[field.id]='');
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
   const navigate = useNavigate();
+  const userData = useSelector(selectUserData);
   const handleChange=(e)=>setSignupState({...signupState,[e.target.id]:e.target.value});
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userData.isAuthenticated) navigate("/login");
+  }, [userData.isAuthenticated, navigate]);
   const handleSubmit=(e)=>{
     e.preventDefault();
     if(signupState.password!=signupState.confirmPassword){
         console.log("Passwords do not match")
     }
     console.log(signupState)
-    createAccount()
-  }
-
-  //handle Signup API Integration here
-  const createAccount=async()=>{
-    console.log("working")
-    try {
-        const res=await axios({
-            method: 'post',
-            url: URL,
-            data: {
-              userName: signupState.username,
-              email: signupState.emailAddress,
-              password:signupState.password
-            }
-        });
-      console.log(res?.data)
-      console.log(res?.status)
-      {
-        res.status==201 && navigate('/')
-      }
-    } catch (error) {
-        console.log(error);
-    }
+    dispatch(signupAsync(signupState));
   }
 
     return(
