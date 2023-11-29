@@ -7,8 +7,14 @@ export const BiddingMain = () => {
 
     const {selectedBook} = useBookDataContext();
     const [currAmount, setCurrAmount] = useState(selectedBook ? parseFloat(selectedBook.price.replace(/,/g, '')) : 0);
-
+    const [highestBid, setHighestBid] = useState(selectedBook ? parseFloat(selectedBook.price.replace(/,/g, ''))+500: 0);
     const [showModal, setShowModal] = useState(false);
+
+    const handlePlace = () => {
+        setShowModal(true);
+        if(currAmount > highestBid)
+            setHighestBid(currAmount);
+    }
 
 
   return (
@@ -40,7 +46,7 @@ export const BiddingMain = () => {
                     <div className="mt-6 rounded-xl bg-gray-100 w-full p-4 flex">
                         <span className='w-1/3 border-r-2 '>
                             <h1 className="text-l font-semibold">Highest Bid Till Now</h1>
-                            <h3 className='text-l font-bold text-green-600 mt-2'>Rs. 50,000</h3>
+                            <h3 className='text-l font-bold text-green-600 mt-2'>Rs. {highestBid}</h3>
                         </span>
                         <span className='w-1/3 pl-6 border-r-2'>
                             <h1 className="text-l font-semibold">Starting Bid Price</h1>
@@ -62,7 +68,7 @@ export const BiddingMain = () => {
                                 <FaRegCircleUser className='text-4xl'/>
                                 <span className='px-4'>
                                     <h2 className="text-l font-bold">Michael Jackson</h2>
-                                    <h3 className="text-m font-semibold text-green-600 ">Rs. 25,000</h3>
+                                    <h3 className="text-m font-semibold text-green-600 ">Rs. {highestBid}</h3>
                                 </span>
                             </span>
                         </span>
@@ -98,7 +104,7 @@ export const BiddingMain = () => {
 
                         <div className="w-2/5">
                             <button className="w-full bg-green-600 font-bold text-white text-xl h-16 rounded-xl"
-                            onClick={()=>setShowModal(true)}>
+                            onClick={handlePlace}>
                                 Place Bid
                             </button>
                         </div>                        

@@ -45,7 +45,7 @@ export const authSlice = createSlice({
       })
       .addCase(signupAsync.fulfilled, (state, action) => {
         console.log(action.payload);
-        if (action.payload.status==201) {
+        if (action.payload) {
           state.isAuthenticated = true;
         }
       })

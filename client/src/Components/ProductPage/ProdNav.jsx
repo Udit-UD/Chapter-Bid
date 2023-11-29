@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Logo from "../../assets/Images/Logo.png";
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { selectUserData } from "../../Features/Auth/authSlice";
 
 export const ProdNav = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  const userData = useSelector(selectUserData);
   return (
     <div>
         <div className='w-full h-20  flex items-center justify-between shadow-md '>
@@ -34,21 +36,25 @@ export const ProdNav = () => {
 
           <div className='mr-10'>
 
-          {authenticated ? (
+          {userData.isAuthenticated ? (
             <Link to="/profile">
             <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
               Profile
             </button>
             </Link>
       ) : (
-        <>
-          <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
-            Login
-          </button>
-          <button className="rounded w-28 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
-            Signup
-          </button>
-        </>
+        <div className="flex">
+          <Link to="/login">
+            <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
+              Login
+            </button>
+          </Link>
+          <Link to="/signup">
+            <button className="rounded w-28 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-purple-600 hover:bg-purple-700 text-white">
+              Signup
+            </button>
+          </Link>
+        </div>
       )}
           </div>
         </div>

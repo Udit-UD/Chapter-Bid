@@ -1,10 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logoutAsync, selectUserData } from "../../Features/Auth/authSlice";
+
+
 
 export const Sidebar = ({activePage}) => {
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUserData);
+  const navigate = useNavigate();
   const getDivStyle = (pageName) => {
     return activePage == pageName ? "bg-purple-600 font-bold text-white" : "";
   };
+
+  useEffect(() => {
+    if (!userData.isAuthenticated) navigate("/login");
+  }, [userData.isAuthenticated, navigate]);
+
+  const handleLogout = () => {
+    dispatch(logoutAsync());
+  }
   return (
     <div className="w-1/5 h-banner bg-gray-50">
         
@@ -28,11 +43,9 @@ export const Sidebar = ({activePage}) => {
             <span className='text-xl font-sans '>Settings</span>
           </div>
         </Link>
-        <Link to = "/login">
           <div className={`h-16 rounded-xl cursor-pointer my-1 w-full flex justify-center items-center ${getDivStyle("logout")}`}>
-            <span className='text-xl font-sans '>Logout</span>
+            <span className='text-xl font-sans ' onClick={handleLogout}>Logout</span>
           </div>
-        </Link>
     </div>
   )
 }

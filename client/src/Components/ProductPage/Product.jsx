@@ -61,7 +61,6 @@ export const Product = ({data}) => {
               </div>
             </div>
             <div className="w-full h-full mt-8 mb-10">
-
               <Recommendations data={data} />
             </div>
           </div>

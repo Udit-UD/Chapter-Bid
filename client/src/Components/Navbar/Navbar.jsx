@@ -4,9 +4,14 @@ import NavLinks from "./NavLinks";
 import { Link } from "react-router-dom";
 import { FaRegBell } from "react-icons/fa6";
 
+import { useSelector } from "react-redux";
+import { selectUserData } from "../../Features/Auth/authSlice";
+
 const Navbar = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+
   const [notiClicked, setNotiClicked] = useState(false);
+
+  const userData = useSelector(selectUserData);
 
   const handleNotiClick = () => {
     setNotiClicked(!notiClicked);
@@ -20,7 +25,7 @@ const Navbar = () => {
       </div>
       <NavLinks />
       <div className="flex flex-grow"></div>
-      {authenticated ? (
+      {userData.isAuthenticated ? (
         <div className="flex items-center justify-between">
           <div className="text-2xl text-gray-700 w-8 m-4 text-center">
             <FaRegBell
@@ -38,12 +43,12 @@ const Navbar = () => {
         </div>
       ) : (
         <>
-          <Link to={"/login"}>
+          <Link to="/login">
             <button className="rounded w-28 mx-4 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-login-trans hover:bg-black hover:text-white">
               Login
             </button>
           </Link>
-          <Link to={"/signup"}>
+          <Link to="/signup">
             <button className="rounded w-28 h-10 p-2 text-1.15 flex font-medium items-center justify-center bg-login-trans hover:bg-black hover:text-white">
               Signup
             </button>

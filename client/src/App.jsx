@@ -8,10 +8,11 @@ import { Orders } from "./Pages/Orders";
 import { Wishlist } from "./Pages/Wishlist";
 import { UnderDev } from "./Pages/UnderDev";
 import { Bidding } from "./Pages/Bidding";
+import { Payment } from "./Pages/Payment";
 
 function App() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center sm:px-6 lg:px-8">
+    <div className="min-h-full h-screen flex justify-center sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -23,7 +24,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/productPage" element={<ProductPage />} />
           <Route path = "/bidding" element = {<Bidding />} />
-
+          <Route path = "/payment" element = {<Payment />} />
 
           <Route path="/settings" element={<UnderDev />}/>
         </Routes>
